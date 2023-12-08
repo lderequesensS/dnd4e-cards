@@ -1,4 +1,4 @@
-import {Button, Grid, Input, InputLabel, MenuItem, Select, TextField, Typography, OutlinedInput,FormControl} from "@mui/material";
+import {Button, Grid, Input, InputLabel, MenuItem, Select, TextField, OutlinedInput,FormControl} from "@mui/material";
 import {useRef, useState} from "react";
 
 
@@ -13,9 +13,10 @@ const fieldLabel = {
         range:'Rango',
         description:'Descripcion',
         icon:'Icono',
-        add:'Agregar',
+        add:'Agregar propiedad',
+        property:'Propiedad',
         types:{
-            0:'A-voluntad',
+            0:'A-Voluntad',
             1:'Encuentro',
             2:'Diario'
         }
@@ -30,7 +31,8 @@ const fieldLabel = {
         range:'Range',
         description:'Description',
         icon:'Icon',
-        add:'Add',
+        add:'Add property',
+        property:'Property',
         types:{
             0:'At-Will',
             1:'Encounter',
@@ -40,16 +42,24 @@ const fieldLabel = {
 
 }
 
+const defaultColors = {
+	white: "#FFFFFF", // white
+	atWill: "#649769", // green
+	encounter: "#981332", // red
+	daily: "#4c4c4e", // gray
+}
+
+
 const fieldStyle = {
     mb:1
 }
 
 
-
 export const App = () => {
     const [language, setLanguage] = useState(fieldLabel.spanish);
     const [languageNumber, setLanguageNumber] = useState(0);
-    const [typeSelected, setTypeSelected] = useState(null)
+    const [typeSelected, setTypeSelected] = useState(0)
+	const [barColor, setBarColor] = useState(defaultColors.white);
 
     const fileInputRef = useRef();
 
@@ -65,25 +75,43 @@ export const App = () => {
 
     const onChangeLanguage = (event) =>{
         const newValue = event.target.value;
-        console.log(event)
         setLanguageNumber(newValue)
 
         switch (newValue) {
             case 0:
-                console.log('entro 0')
                 setLanguage(fieldLabel.spanish);
                 break;
             case 1:
-                console.log('entro 1')
                 setLanguage(fieldLabel.english);
                 break;
         }
     }
 
+	const typeChange = (event) => {
+		console.log(event.target.value);
+		const newType = event.target.value;
+		setTypeSelected(newType)
+
+		// Change used defaultColors
+		switch(newType) {
+			case 0: // green
+				setBarColor(defaultColors.atWill);
+				break
+			case 1: // red
+				setBarColor(defaultColors.encounter);
+				break
+			case 2: // grey
+				setBarColor(defaultColors.daily);
+				break
+			default:
+				setBarColor(defaultColors.white);
+				console.log("what defaultColors did you just pass me?");
+		}
+
+	}
+
     return (
         <>
-            {/*<Typography variant={'h1'}> TEST TEXT FILE</Typography>*/}
-
             <Grid container sx={{ml:10, mr:20, mt:10}} >
                 <Grid container item sm={4} justifyContent={'center'}>
 
@@ -114,8 +142,8 @@ export const App = () => {
                             <Select
                                 labelId={'type-label'}
                                 sx={fieldStyle}
-                                valu={typeSelected}
-                                onChange={setTypeSelected}
+                                value={typeSelected}
+                                onChange={typeChange}
                             >
                                 <MenuItem value={0}>{language.types[0]}</MenuItem>
                                 <MenuItem value={1}>{language.types[1]}</MenuItem>
@@ -130,7 +158,7 @@ export const App = () => {
                         <TextField fullWidth multiline sx={fieldStyle} type={"text"} label={language.description}></TextField>
                     </Grid>
                     <Grid item sm={12}>
-                        <TextField fullWidth multiline sx={fieldStyle} type={"text"} label={language.description}></TextField>
+                        <TextField fullWidth multiline sx={fieldStyle} type={"text"} label={language.property}></TextField>
                     </Grid>
                     <Grid item sm={6}>
                         <Button variant={'contained'} fullWidth>{language.add}</Button>

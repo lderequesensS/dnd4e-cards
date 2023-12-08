@@ -1,8 +1,15 @@
-# React + Vite
+# D&D 4e power cards generator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is heavily inspired in https://tools.omnichron.net/dnd/pow.html, for the
+moment this is only for PCs powers and no more tools.
 
-Currently, two official plugins are available:
+## You want to run it locally?
+```
+yarn
+yarn dev
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Online
+
+[https://dnd4e-cards.netlify.app/](https://dnd4e-cards.netlify.app/)
+

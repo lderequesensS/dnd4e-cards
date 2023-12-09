@@ -1,57 +1,21 @@
-import {Button, Grid, Input, InputLabel, MenuItem, Select, TextField, OutlinedInput,FormControl} from "@mui/material";
+import {Button, Grid, Input, InputLabel, MenuItem, Select, TextField, OutlinedInput, FormControl} from "@mui/material";
 import {useRef, useState} from "react";
-
-
-const fieldLabel = {
-    spanish:{
-        language:'Lenguaje',
-        name: 'Nombre',
-        level:'Nivel',
-        type:'Tipo',
-        keywords:'Palabras clave',
-        action:'Acción',
-        range:'Rango',
-        description:'Descripcion',
-        icon:'Icono',
-        add:'Agregar propiedad',
-        property:'Propiedad',
-        types:{
-            0:'A-Voluntad',
-            1:'Encuentro',
-            2:'Diario'
-        }
-    },
-    english:{
-        language:'Language',
-        name: 'Name',
-        level:'Level',
-        type:'Type',
-        keywords:'Keywords',
-        action:'Action',
-        range:'Range',
-        description:'Description',
-        icon:'Icon',
-        add:'Add property',
-        property:'Property',
-        types:{
-            0:'At-Will',
-            1:'Encounter',
-            2:'Daily'
-        }
-    },
-
-}
-
-const defaultColors = {
-	white: "#FFFFFF", // white
-	atWill: "#649769", // green
-	encounter: "#981332", // red
-	daily: "#4c4c4e", // gray
-}
+import {fieldLabel} from "./language.js";
+import {useForm} from "./useForm.js";
+import {PropertyList} from "./PropertyList.jsx";
 
 
 const fieldStyle = {
     mb:1
+}
+
+const initData = {
+    name:'',
+    level:'',
+    type:'0',
+    keywords:'',
+    description:'',
+    properties:['']
 }
 
 
@@ -59,7 +23,9 @@ export const App = () => {
     const [language, setLanguage] = useState(fieldLabel.spanish);
     const [languageNumber, setLanguageNumber] = useState(0);
     const [typeSelected, setTypeSelected] = useState(0)
-	const [barColor, setBarColor] = useState(defaultColors.white);
+	const [barColor, setBarColor] = useState('atWill.main');
+    const {name, level, type, keywords, description, properties, onInputChange } = useForm(initData);
+
 
     const fileInputRef = useRef();
 
@@ -73,6 +39,10 @@ export const App = () => {
         reader.readAsText(e.target.files[0])
     }
 
+    const onAddProperty = () =>{
+        const newValue = [...properties, ''];
+        onInputChange({target:{value:newValue, name:'properties'}})
+    }
     const onChangeLanguage = (event) =>{
         const newValue = event.target.value;
         setLanguageNumber(newValue)
@@ -88,26 +58,22 @@ export const App = () => {
     }
 
 	const typeChange = (event) => {
-		console.log(event.target.value);
-		const newType = event.target.value;
-		setTypeSelected(newType)
-
+        onInputChange(event);
+		const {value} = event.target;
 		// Change used defaultColors
-		switch(newType) {
+		switch(value) {
 			case 0: // green
-				setBarColor(defaultColors.atWill);
+				setBarColor("atWill.main");
 				break
 			case 1: // red
-				setBarColor(defaultColors.encounter);
+				setBarColor("encounter.main");
 				break
 			case 2: // grey
-				setBarColor(defaultColors.daily);
+				setBarColor("daily.main");
 				break
 			default:
-				setBarColor(defaultColors.white);
-				console.log("what defaultColors did you just pass me?");
+				setBarColor('white');
 		}
-
 	}
 
     return (
@@ -123,6 +89,7 @@ export const App = () => {
                             labelId="language-label"
                             value={languageNumber}
                             onChange={onChangeLanguage}
+                            input={<OutlinedInput label={language.language} />}
                         >
                             <MenuItem value={0} default>Español</MenuItem>
                             <MenuItem value={1}>English</MenuItem>
@@ -131,10 +98,19 @@ export const App = () => {
                     </Grid>
 
                     <Grid item sm={6}>
-                        <TextField fullWidth type={"text"} sx={fieldStyle} label={language.name}></TextField>
+                        <TextField fullWidth
+                                   value={name}
+                                   name={'name'}
+                                   onChange={onInputChange}
+                                   type={"text"} sx={fieldStyle} label={language.name}
+                        />
                     </Grid>
                     <Grid item sm={6}>
-                        <TextField fullWidth type={"text"} sx={fieldStyle} label={language.level}></TextField>
+                        <TextField fullWidth
+                                   value={level}
+                                   name={'level'}
+                                   onChange={onInputChange}
+                                   type={"text"} sx={fieldStyle} label={language.level}></TextField>
                     </Grid>
                     <Grid item sm={12}>
                         <FormControl fullWidth>
@@ -142,8 +118,11 @@ export const App = () => {
                             <Select
                                 labelId={'type-label'}
                                 sx={fieldStyle}
-                                value={typeSelected}
+                                value={type}
+                                name={'type'}
                                 onChange={typeChange}
+                                input={<OutlinedInput label={language.type} />}
+                                // sx={{}}
                             >
                                 <MenuItem value={0}>{language.types[0]}</MenuItem>
                                 <MenuItem value={1}>{language.types[1]}</MenuItem>
@@ -152,20 +131,42 @@ export const App = () => {
                         </FormControl>
                     </Grid>
                         <Grid item sm={12}>
-                            <TextField fullWidth type={"text"} sx={fieldStyle} label={language.keywords}></TextField>
+                            <TextField fullWidth
+                                       value={keywords}
+                                       name={'keywords'}
+                                       type={"text"} sx={fieldStyle} label={language.keywords}
+                            />
                         </Grid>
                     <Grid item sm={12}>
-                        <TextField fullWidth multiline sx={fieldStyle} type={"text"} label={language.description}></TextField>
+                        <TextField fullWidth
+                                   value={description}
+                                   name={'description'}
+                                   multiline sx={fieldStyle} type={"text"}
+                                   label={language.description}
+                        />
                     </Grid>
                     <Grid item sm={12}>
-                        <TextField fullWidth multiline sx={fieldStyle} type={"text"} label={language.property}></TextField>
+                        <PropertyList properties={properties} label={language.property} onChange={onInputChange}/>
                     </Grid>
                     <Grid item sm={6}>
-                        <Button variant={'contained'} fullWidth>{language.add}</Button>
+                        <Button variant={'contained'} fullWidth onClick={onAddProperty}>{language.add}</Button>
                     </Grid>
+
                 </Grid>
 
-                <Grid item sm={5}  sx={{height:200}}>
+                <Grid item sm={6} sx={{border:1, ml:5}} >
+                    <Grid container sx={{height:50, backgroundColor:barColor, color:'white'}} justifyContent={'space-between'} alignItems={'center'}>
+                        <Grid item ml={2}>
+                            {'icono'}
+                        </Grid>
+                        <Grid item>
+                            {'Nombre'}
+                        </Grid>
+                        <Grid item mr={2}>
+                            {'Level'}
+                        </Grid>
+                    </Grid>
+                    {'aqui te dejo el diamante para copiar y pegar jeje  ♦'}
 
                 </Grid>
             </Grid>

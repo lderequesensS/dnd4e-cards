@@ -15,7 +15,17 @@ export const PurpleTheme = createTheme({
         },
         active:{
             main: '#50AA50'
-        }
+        },
+        atWill:{
+            main: '#649769'
+        },
+        encounter:{
+            main: "#981332"
+        },
+        daily:{
+            main: "#4c4c4e"
+        },
+
 
     }
 })

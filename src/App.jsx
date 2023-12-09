@@ -15,16 +15,19 @@ const initData = {
 	type:'0',
 	keywords:'',
 	description:'',
-	properties:['']
+	properties:[''],
+	action:'0',
+	range: ''
 }
 
 
 export const App = () => {
 	const [language, setLanguage] = useState(fieldLabel.spanish);
 	const [languageNumber, setLanguageNumber] = useState(0);
-	const [powerType, setPowerType] = useState("A-Voluntad");
+	const [powerType, setPowerType] = useState(fieldLabel.spanish.types[0]);
 	const [barColor, setBarColor] = useState('atWill.main');
-	const {name, level, type, keywords, description, properties, onInputChange} = useForm(initData);
+	const [powerAction, setPowerAction] = useState(fieldLabel.spanish.actions[0]);
+	const {name, level, type, keywords, description, properties, action, range, onInputChange} = useForm(initData);
 
 
 	const fileInputRef = useRef();
@@ -80,6 +83,13 @@ export const App = () => {
 		}
 	}
 
+	const changeAction = (event) => {
+		onInputChange(event)
+		const {value} = event.target;
+
+		setPowerAction(language.actions[value])
+	}
+
 	return (
 		<>
 
@@ -122,6 +132,7 @@ export const App = () => {
 									onChange={onInputChange}
 									type={"text"} sx={fieldStyle} label={language.level}></TextField>
 					</Grid>
+
 					<Grid item sm={12}>
 						<FormControl fullWidth>
 							<InputLabel id={'type-label'}>{language.type}</InputLabel>
@@ -132,7 +143,6 @@ export const App = () => {
 								name={'type'}
 								onChange={typeChange}
 								input={<OutlinedInput label={language.type} />}
-								// sx={{}}
 							>
 								<MenuItem value={0}>{language.types[0]}</MenuItem>
 								<MenuItem value={1}>{language.types[1]}</MenuItem>
@@ -140,14 +150,45 @@ export const App = () => {
 							</Select>
 						</FormControl>
 					</Grid>
-						<Grid item sm={12}>
-							<TextField fullWidth
-										value={keywords}
-										name={'keywords'}
-										onChange={onInputChange}
-										type={"text"} sx={fieldStyle} label={language.keywords}
-							/>
-						</Grid>
+
+					<Grid item sm={12}>
+						<TextField fullWidth
+									value={keywords}
+									name={'keywords'}
+									onChange={onInputChange}
+									type={"text"} sx={fieldStyle} label={language.keywords}
+						/>
+					</Grid>
+
+					<Grid item sm={6}>
+						<FormControl fullWidth>
+							<InputLabel id={'action-label'}>{language.action}</InputLabel>
+							<Select
+								labelId={'action-label'}
+								sx={fieldStyle}
+								value={action}
+								name={'action'}
+								onChange={changeAction}
+								input={<OutlinedInput label={language.action} />}
+							>
+								<MenuItem value={0}>{language.actions[0]}</MenuItem>
+								<MenuItem value={1}>{language.actions[1]}</MenuItem>
+								<MenuItem value={2}>{language.actions[2]}</MenuItem>
+								<MenuItem value={3}>{language.actions[3]}</MenuItem>
+								<MenuItem value={4}>{language.actions[4]}</MenuItem>
+								<MenuItem value={5}>{language.actions[5]}</MenuItem>
+							</Select>
+						</FormControl>
+					</Grid>
+					<Grid item sm={6}>
+						<TextField fullWidth
+									value={range}
+									name={'range'}
+									onChange={onInputChange}
+									type={"text"} sx={fieldStyle} label={language.range}
+						/>
+					</Grid>
+
 					<Grid item sm={12}>
 						<TextField fullWidth
 									value={description}
@@ -157,6 +198,7 @@ export const App = () => {
 									label={language.description}
 						/>
 					</Grid>
+
 					<Grid item sm={12}>
 						<PropertyList properties={properties} label={language.property} onChange={onInputChange}/>
 					</Grid>
@@ -168,7 +210,7 @@ export const App = () => {
 
 				{/* Viewer */}
 
-				<Grid item sm={6} sx={{border:1, ml:5}} >
+				<Grid item sm={5} sx={{border:1, ml:5}} >
 					<Grid container sx={{height:50, backgroundColor:barColor, color:'white'}} justifyContent={'space-between'} alignItems={'center'}>
 						<Grid item ml={2}>
 							{'icono'}
@@ -179,7 +221,11 @@ export const App = () => {
 						</Grid>
 					</Grid>
 					{/* Todo: change rhombus to other font */}
-					<Typography sx={{fontWeight: 'bold'}}>{powerType} ♦ {keywords}</Typography>
+					<Typography ml={1} sx={{fontWeight: 'bold'}}>{powerType} ♦ {keywords}</Typography>
+					<Grid item xs={12} style={{ display: "flex", gap: "2rem"}}>
+						<Typography ml={1} sx={{fontWeight: 'bold'}}>{powerAction}</Typography>
+						<Typography ml={1} sx={{fontWeight: 'bold'}}>{range}</Typography>
+					</Grid>
 
 					{/* Description */}
 					<Grid item xs={3} alignItems='flex-end' bottom='0'>

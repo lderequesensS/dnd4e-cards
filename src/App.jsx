@@ -1,4 +1,4 @@
-import {Button, Grid, Input, InputLabel, MenuItem, Select, TextField, OutlinedInput, FormControl} from "@mui/material";
+import {Button, Grid, Typography, InputLabel, MenuItem, Select, TextField, OutlinedInput, FormControl} from "@mui/material";
 import {useRef, useState} from "react";
 import {fieldLabel} from "./language.js";
 import {useForm} from "./useForm.js";
@@ -22,6 +22,7 @@ const initData = {
 export const App = () => {
 	const [language, setLanguage] = useState(fieldLabel.spanish);
 	const [languageNumber, setLanguageNumber] = useState(0);
+	const [powerType, setPowerType] = useState("A-Voluntad");
 	const [barColor, setBarColor] = useState('atWill.main');
 	const {name, level, type, keywords, description, properties, onInputChange} = useForm(initData);
 
@@ -49,6 +50,7 @@ export const App = () => {
 		switch (newValue) {
 			case 0:
 				setLanguage(fieldLabel.spanish);
+				// Todo: when changing language chango also the power type to thta language
 				break;
 			case 1:
 				setLanguage(fieldLabel.english);
@@ -59,16 +61,19 @@ export const App = () => {
 	const typeChange = (event) => {
 		onInputChange(event);
 		const {value} = event.target;
-		// Change used defaultColors
+
 		switch(value) {
 			case 0: // green
 				setBarColor("atWill.main");
+				setPowerType(language.types[0])
 				break
 			case 1: // red
 				setBarColor("encounter.main");
+				setPowerType(language.types[1])
 				break
 			case 2: // grey
 				setBarColor("daily.main");
+				setPowerType(language.types[2])
 				break
 			default:
 				setBarColor('white');
@@ -77,6 +82,12 @@ export const App = () => {
 
 	return (
 		<>
+
+			{/*<Button variant={'contained'} componet={'label'} onClick={()=>fileInputRef.current.click()}>*/}
+			{/*    {'Cargar'}*/}
+			{/*    <Input inputRef={fileInputRef} type="file" sx={{display:'none'}} onChange={(e) => showFile(e)} />*/}
+			{/*</Button>*/}
+
 			<Grid container sx={{ml:10, mr:20, mt:10}} >
 				<Grid container item sm={4} justifyContent={'center'}>
 
@@ -133,6 +144,7 @@ export const App = () => {
 							<TextField fullWidth
 										value={keywords}
 										name={'keywords'}
+										onChange={onInputChange}
 										type={"text"} sx={fieldStyle} label={language.keywords}
 							/>
 						</Grid>
@@ -141,6 +153,7 @@ export const App = () => {
 									value={description}
 									name={'description'}
 									multiline sx={fieldStyle} type={"text"}
+									onChange={onInputChange}
 									label={language.description}
 						/>
 					</Grid>
@@ -153,28 +166,30 @@ export const App = () => {
 
 				</Grid>
 
+				{/* Viewer */}
+
 				<Grid item sm={6} sx={{border:1, ml:5}} >
 					<Grid container sx={{height:50, backgroundColor:barColor, color:'white'}} justifyContent={'space-between'} alignItems={'center'}>
 						<Grid item ml={2}>
 							{'icono'}
 						</Grid>
-						<Grid item>
-							{name}
-						</Grid>
+						<Typography sx={{fontWeight: 'bold'}}>{name}</Typography>
 						<Grid item mr={2}>
-							{level}
+							<Typography sx={{fontWeight: 'bold'}}>{level}</Typography>
 						</Grid>
 					</Grid>
-					{'aqui te dejo el diamante para copiar y pegar jeje  ♦'}
+					{/* Todo: change rhombus to other font */}
+					<Typography sx={{fontWeight: 'bold'}}>{powerType} ♦ {keywords}</Typography>
+
+					{/* Description */}
+					<Grid item xs={3} alignItems='flex-end' bottom='0'>
+
+					</Grid>
 
 				</Grid>
+
 			</Grid>
 
-
-			{/*<Button variant={'contained'} componet={'label'} onClick={()=>fileInputRef.current.click()}>*/}
-			{/*    {'Cargar'}*/}
-			{/*    <Input inputRef={fileInputRef} type="file" sx={{display:'none'}} onChange={(e) => showFile(e)} />*/}
-			{/*</Button>*/}
 		</>
 	);
 };

@@ -101,16 +101,13 @@ export const App = () => {
 			<Grid container align='center'
 					alignItems="center"
 					justifyContent="left"
-					ml={'20%'}
+					ml={{xs: 0, sm: 0, md:10}}
 			>
 				<Box
 					// Todo: make this nicer with good dimensions, also the image is with white background
 					component="img"
 					sx={{
-						height: 435,
-						width: 1527,
-						maxHeight: { xs: 233, md: 167 },
-						maxWidth: { xs: 450, md: 550 },
+						width: {xs:'100%',sm:'100%', md:'50%'},
 					}}
 					alt="DnD 4e logo"
 					src="dnd_4e_logo.jpg"
@@ -119,10 +116,10 @@ export const App = () => {
 				<Typography ml={8} sx={{fontWeight: 'bold'}} variant='h2'>Simple card generator</Typography>
 			</Grid>
 
-			<Grid container sx={{ml:10, mr:20, mt:10}} >
-				<Grid container item sm={4} justifyContent={'center'}>
+			<Grid container sx={{mt:10}} justifyContent={'center'}>
+				<Grid container item xs={12} sm={10} md={5} justifyContent={'center'}>
 
-					<Grid item sm={12}>
+					<Grid item xs={12} sm={12}>
 					<FormControl fullWidth>
 						<InputLabel id="language-label">{language.language}</InputLabel>
 						<Select
@@ -138,7 +135,7 @@ export const App = () => {
 					</FormControl>
 					</Grid>
 
-					<Grid item sm={6}>
+					<Grid item xs={12} sm={12} md={6}>
 						<TextField fullWidth
 									value={name}
 									name={'name'}
@@ -146,7 +143,7 @@ export const App = () => {
 									type={"text"} sx={fieldStyle} label={language.name}
 						/>
 					</Grid>
-					<Grid item sm={6}>
+					<Grid item xs={12} sm={12} md={6}>
 						<TextField fullWidth
 									value={level}
 									name={'level'}
@@ -154,7 +151,7 @@ export const App = () => {
 									type={"text"} sx={fieldStyle} label={language.level}></TextField>
 					</Grid>
 
-					<Grid item sm={12}>
+					<Grid item xs={12} sm={12} md={12}>
 						<FormControl fullWidth>
 							<InputLabel id={'type-label'}>{language.type}</InputLabel>
 							<Select
@@ -172,7 +169,7 @@ export const App = () => {
 						</FormControl>
 					</Grid>
 
-					<Grid item sm={12}>
+					<Grid item xs={12} sm={12}>
 						<TextField fullWidth
 									value={keywords}
 									name={'keywords'}
@@ -181,7 +178,7 @@ export const App = () => {
 						/>
 					</Grid>
 
-					<Grid item sm={6}>
+					<Grid item xs={12} sm={12} md={6}>
 						<FormControl fullWidth>
 							<InputLabel id={'action-label'}>{language.action}</InputLabel>
 							<Select
@@ -201,7 +198,7 @@ export const App = () => {
 							</Select>
 						</FormControl>
 					</Grid>
-					<Grid item sm={6}>
+					<Grid item xs={12} sm={12} md={6}>
 						<TextField fullWidth
 									value={range}
 									name={'range'}
@@ -210,7 +207,7 @@ export const App = () => {
 						/>
 					</Grid>
 
-					<Grid item sm={12}>
+					<Grid item xs={12} sm={12}>
 						<TextField fullWidth
 									value={description}
 									name={'description'}
@@ -220,10 +217,10 @@ export const App = () => {
 						/>
 					</Grid>
 
-					<Grid item sm={12}>
+					<Grid item xs={12} sm={12}>
 						<PropertyList properties={properties} label={language.property} onChange={onInputChange}/>
 					</Grid>
-					<Grid item sm={6}>
+					<Grid item sm={6} mb={{xs:5,sm:5, md: 0}}>
 						<Button variant={'contained'} fullWidth onClick={onAddProperty}>{language.add}</Button>
 					</Grid>
 
@@ -231,8 +228,8 @@ export const App = () => {
 
 				{/* Viewer */}
 
-				<Grid item sm={5} sx={{border:1, ml:5}} >
-					<Grid container sx={{height:50, backgroundColor:barColor, color:'white'}} justifyContent={'space-between'} alignItems={'center'}>
+				<Grid item xs={12} sm={10} md={5} sx={{border:1, ml:{sm:0,md:4}, mb:{xs:20,sm:20,md:0}, minHeight:{sm:'500px',md:0} }} >
+					<Grid container sx={{height:'50px', backgroundColor:barColor, color:'white'}} justifyContent={'space-between'} alignItems={'center'}>
 						<Grid item ml={2}>
 							{'icono'}
 						</Grid>
@@ -242,19 +239,18 @@ export const App = () => {
 						</Grid>
 					</Grid>
 					{/* Todo: change rhombus to other font */}
-					<Typography ml={1} sx={{fontWeight: 'bold'}}>{powerType} ♦ {keywords}</Typography>
-					<Grid item xs={12} style={{ display: "flex", gap: "2rem"}}>
-						<Typography ml={1} sx={{fontWeight: 'bold'}}>{powerAction}</Typography>
-						<Typography ml={1} sx={{fontWeight: 'bold'}}>{range}</Typography>
-					</Grid>
-
-					{/* Description */}
-					<Grid item xs={3} alignItems='flex-end' bottom='0'>
-
+					<Grid container direction="column" justifyContent="space-between" alignItems="flex-start" height={'calc(100% - 50px)'}	>
+						<Grid item >
+								<Typography ml={1} sx={{fontWeight: 'bold'}}>{powerType} ♦ {keywords}</Typography>
+								<Typography ml={1} sx={{fontWeight: 'bold'}} display={'inline'}>{powerAction}</Typography>
+								<Typography ml={1} sx={{fontWeight: 'bold'}} display={'inline'}>{range}</Typography>
+						</Grid>
+						<Grid item >
+							{description}
+						</Grid>
 					</Grid>
 
 				</Grid>
-
 			</Grid>
 
 		</>

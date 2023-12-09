@@ -1,4 +1,4 @@
-import {Button, Grid, Typography, InputLabel, MenuItem, Select, TextField, OutlinedInput, FormControl} from "@mui/material";
+import {Button, Grid, Typography, InputLabel, MenuItem, Select, TextField, OutlinedInput, FormControl, Box} from "@mui/material";
 import {useRef, useState} from "react";
 import {fieldLabel} from "./language.js";
 import {useForm} from "./useForm.js";
@@ -97,6 +97,27 @@ export const App = () => {
 			{/*    {'Cargar'}*/}
 			{/*    <Input inputRef={fileInputRef} type="file" sx={{display:'none'}} onChange={(e) => showFile(e)} />*/}
 			{/*</Button>*/}
+
+			<Grid container align='center'
+					alignItems="center"
+					justifyContent="left"
+					ml={'20%'}
+			>
+				<Box
+					// Todo: make this nicer with good dimensions, also the image is with white background
+					component="img"
+					sx={{
+						height: 435,
+						width: 1527,
+						maxHeight: { xs: 233, md: 167 },
+						maxWidth: { xs: 450, md: 550 },
+					}}
+					alt="DnD 4e logo"
+					src="dnd_4e_logo.jpg"
+				/>
+				{/* Todo: make this with another font to be nicer */}
+				<Typography ml={8} sx={{fontWeight: 'bold'}} variant='h2'>Simple card generator</Typography>
+			</Grid>
 
 			<Grid container sx={{ml:10, mr:20, mt:10}} >
 				<Grid container item sm={4} justifyContent={'center'}>

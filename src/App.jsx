@@ -98,22 +98,26 @@ export const App = () => {
 			{/*    <Input inputRef={fileInputRef} type="file" sx={{display:'none'}} onChange={(e) => showFile(e)} />*/}
 			{/*</Button>*/}
 
-			<Grid container align='center'
+			<Grid container
 					alignItems="center"
 					justifyContent="left"
-					ml={{xs: 0, sm: 0, md:10}}
 			>
-				<Box
-					// Todo: make this nicer with good dimensions, also the image is with white background
-					component="img"
-					sx={{
-						width: {xs:'100%',sm:'100%', md:'50%'},
-					}}
-					alt="DnD 4e logo"
-					src="dnd_4e_logo.jpg"
-				/>
+				<Grid item sm={12} md={6} >
+					<Box
+						// Todo: make this nicer with good dimensions, also the image is with white background
+						component="img"
+						sx={{
+							width: {xs:'70%',sm:'70%', md:'100%'},
+						}}
+						alt="DnD 4e logo"
+						src="dnd_4e_logo.jpg"
+						ml={{xs: 0, sm: 0, md:10}}
+					/>
+				</Grid>
+				<Grid item sm={12} md={6}>
+					<Typography ml={{xs: 0, sm: 0, md:10}} sx={{fontWeight: 'bold', fontSize:{xs:'30px',sm:'30px',md:'36px'}}} variant='h2'>Simple card generator</Typography>
+				</Grid>
 				{/* Todo: make this with another font to be nicer */}
-				<Typography ml={8} sx={{fontWeight: 'bold'}} variant='h2'>Simple card generator</Typography>
 			</Grid>
 
 			<Grid container sx={{mt:10}} justifyContent={'center'}>

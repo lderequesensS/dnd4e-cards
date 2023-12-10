@@ -101,24 +101,26 @@ export const App = () => {
 
 			<Grid container
 					alignItems="center"
-					justifyContent="left"
+					sx={{
+						justifyContent:{xs:'center', sm:'center', md:'left'}
+				}}
 			>
-				<Grid item sm={12} md={6} >
+				<Grid item xs={8} sm={8} md={6}>
 					<Box
 						// Todo: make this nicer with good dimensions, also the image is with white background
 						component="img"
 						sx={{
-							width: {xs:'70%',sm:'70%', md:'100%'},
+							width: {xs:'100%',sm:'100%', md:'80%'},
 						}}
 						alt="DnD 4e logo"
 						src="dnd_4e_logo.jpg"
-						ml={{xs: 0, sm: 0, md:10}}
+						ml={{xs: 1, sm: 3, md:10}}
 					/>
 				</Grid>
-				<Grid item sm={12} md={6}>
-					<Typography ml={{xs: 0, sm: 0, md:10}} sx={{fontWeight: 'bold', fontSize:{xs:'30px',sm:'30px',md:'36px'}}} variant='h2'>Simple card generator</Typography>
-				</Grid>
 				{/* Todo: make this with another font to be nicer */}
+				<Grid item sm={6} md={6}>
+					<Typography ml={{xs: 2, sm: 3, md:10}} sx={{fontWeight: 'bold', fontSize:{xs:'30px',sm:'30px',md:'36px'}}} variant='h2'>Simple card generator</Typography>
+				</Grid>
 			</Grid>
 
 			<Grid container sx={{mt:10}} justifyContent={'center'}>

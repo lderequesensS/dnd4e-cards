@@ -3,6 +3,7 @@ import {useRef, useState} from "react";
 import {fieldLabel} from "./language.js";
 import {useForm} from "./useForm.js";
 import {PropertyList} from "./PropertyList.jsx";
+import {PropertyListViewer} from "./PropertyListViewer.jsx";
 
 
 const fieldStyle = {
@@ -251,7 +252,7 @@ export const App = () => {
 							<Typography sx={{fontWeight: 'bold', background:'linear-gradient(to right, #999, #ffffff)', pl:1}} >{powerType} ♦ {keywords}</Typography>
 							<Typography sx={{fontWeight: 'bold', pl:1}} display={'inline'}>{powerAction}</Typography>
 							<Typography sx={{fontWeight: 'bold', pl:1}} display={'inline'}>{range}</Typography>
-							{properties.map((elemento,index) => (<Typography key={index} ml={1} sx={{fontWeight: 'bold'}}>{elemento}</Typography>))}
+							<PropertyListViewer properties={properties}/>
 						</Grid>
 						<Grid container item justifyContent={'center'}>
 							<Typography align={'justify'} pl={4} pr={4}>
@@ -262,7 +263,6 @@ export const App = () => {
 
 				</Grid>
 			</Grid>
-
 		</>
 	);
 };

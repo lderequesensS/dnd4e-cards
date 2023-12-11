@@ -26,10 +26,8 @@ const initData = {
 export const App = () => {
 	const [language, setLanguage] = useState(fieldLabel.spanish);
 	const [languageNumber, setLanguageNumber] = useState(0);
-	const [powerType, setPowerType] = useState(fieldLabel.spanish.types[0]);
 	const [barColor, setBarColor] = useState('atWill.main');
-	const [powerAction, setPowerAction] = useState(fieldLabel.spanish.actions[0]);
-	const {name, level, type, keywords, description, properties, action, range, onInputChange} = useForm(initData);
+	const {name, level, type, keywords, description, properties, action, range, onInputChange, formState} = useForm(initData);
 	const linearGradient = {background:'linear-gradient(to right, #dcddcb, #ffffff)'};
 
 	const fileInputRef = useRef();
@@ -55,12 +53,12 @@ export const App = () => {
 		switch (newValue) {
 			case 0:
 				setLanguage(fieldLabel.spanish);
-				// Todo: when changing language chango also the power type to thta language
 				break;
 			case 1:
 				setLanguage(fieldLabel.english);
 				break;
 		}
+
 	}
 
 	const typeChange = (event) => {
@@ -70,27 +68,18 @@ export const App = () => {
 		switch(value) {
 			case 0: // green
 				setBarColor("atWill.main");
-				setPowerType(language.types[0])
 				break
 			case 1: // red
 				setBarColor("encounter.main");
-				setPowerType(language.types[1])
 				break
 			case 2: // grey
 				setBarColor("daily.main");
-				setPowerType(language.types[2])
 				break
 			default:
 				setBarColor('white');
 		}
 	}
 
-	const changeAction = (event) => {
-		onInputChange(event)
-		const {value} = event.target;
-
-		setPowerAction(language.actions[value])
-	}
 
 	return (
 		<>
@@ -106,12 +95,12 @@ export const App = () => {
 						justifyContent:{xs:'center', sm:'center', md:'left'}
 				}}
 			>
-				<Grid item xs={8} sm={8} md={6}>
+				<Grid item xs={8} sm={8} md={4}>
 					<Box
 						// Todo: make this nicer with good dimensions, also the image is with white background
 						component="img"
 						sx={{
-							width: {xs:'100%',sm:'100%', md:'80%'},
+							width: {xs:'100%',sm:'100%', md:'100%'},
 						}}
 						alt="DnD 4e logo"
 						src="dnd_4e_logo.jpg"
@@ -163,6 +152,7 @@ export const App = () => {
 						<FormControl fullWidth>
 							<InputLabel id={'type-label'}>{language.type}</InputLabel>
 							<Select
+								defaultValue={0}
 								labelId={'type-label'}
 								sx={fieldStyle}
 								value={type}
@@ -190,11 +180,12 @@ export const App = () => {
 						<FormControl fullWidth>
 							<InputLabel id={'action-label'}>{language.action}</InputLabel>
 							<Select
+								defaultValue={0}
 								labelId={'action-label'}
 								sx={fieldStyle}
 								value={action}
 								name={'action'}
-								onChange={changeAction}
+								onChange={onInputChange}
 								input={<OutlinedInput label={language.action} />}
 							>
 								<MenuItem value={0}>{language.actions[0]}</MenuItem>
@@ -234,15 +225,10 @@ export const App = () => {
 
 				</Grid>
 
-				<Viewer barColor={barColor}
-						name={name}
-						level={level}
-						powerType={powerType}
-						keywords={keywords}
-						powerAction={powerAction}
-						range={range}
-						properties={properties}
-						description={description}
+				<Viewer 
+					barColor={barColor}
+					formState={formState}
+					language={language}
 				/>
 
 			</Grid>

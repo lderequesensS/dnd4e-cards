@@ -111,25 +111,26 @@ export const App = () => {
 				<Grid item sm={6} md={6}>
 					<Typography ml={{xs: 2, sm: 3, md:10}} sx={{fontWeight: 'bold', fontSize:{xs:'30px',sm:'30px',md:'36px'}}} variant='h2'>Simple card generator</Typography>
 				</Grid>
+
+				<FormControl >
+					<InputLabel id="language-label">{language.language}</InputLabel>
+					<Select
+						sx={fieldStyle}
+						labelId="language-label"
+						value={languageNumber}
+						onChange={onChangeLanguage}
+						input={<OutlinedInput label={language.language} />}
+						>
+					<MenuItem value={0} default>Español</MenuItem>
+					<MenuItem value={1}>English</MenuItem>
+					</Select>
+				</FormControl>
 			</Grid>
 
 			<Grid container sx={{mt:10}} justifyContent={'center'}>
 				<Grid container item xs={12} sm={10} md={5} justifyContent={'center'}>
 
 					<Grid item xs={12} sm={12}>
-					<FormControl fullWidth>
-						<InputLabel id="language-label">{language.language}</InputLabel>
-						<Select
-							sx={fieldStyle}
-							labelId="language-label"
-							value={languageNumber}
-							onChange={onChangeLanguage}
-							input={<OutlinedInput label={language.language} />}
-						>
-							<MenuItem value={0} default>Español</MenuItem>
-							<MenuItem value={1}>English</MenuItem>
-						</Select>
-					</FormControl>
 					</Grid>
 
 					<Grid item xs={12} sm={12} md={6}>

@@ -7,7 +7,7 @@ export const Viewer = ({barColor, formState, language}) => {
 		<>
 			<ThemeProvider theme={typoTheme}>
 			<CssBaseline/>
-			<Grid item xs={12} sm={10} md={5} sx={{border:1, ml:{sm:0,md:4}, mb:{xs:20,sm:20,md:0}, minHeight:{sm:'500px',md:0}, height:(300 + formState.properties.length * 40) + 'px'}} >
+			<Grid item xs={12} sm={10} md={5} sx={{border:1, ml:{sm:0,md:4}, mb:{xs:20,sm:20,md:0}, minHeight:{sm:'500px',md:0}, height:(300 + formState.properties.length * 20) + 'px'}} >
 				<Grid container sx={{height:'50px', backgroundColor:barColor, color:'white'}} justifyContent={'space-between'} alignItems={'center'}>
 					<Grid item ml={2}>
 						{/*Todo change icon*/}
@@ -18,7 +18,6 @@ export const Viewer = ({barColor, formState, language}) => {
 						<Typography sx={{fontWeight: 'bold'}}>{formState.level}</Typography>
 					</Grid>
 				</Grid>
-				{/* Todo: change rhombus to other font */}
 				<Grid container direction="column" justifyContent="space-between" alignItems="flex-start" height={'calc(100% - 50px)'}	>
 					<Grid item sx={{width:'98%'}} >
 						<Typography sx={{fontWeight: 'bold', pl:1}} >{language.types[formState.type]} ♦ {formState.keywords}</Typography>

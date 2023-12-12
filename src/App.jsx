@@ -219,6 +219,8 @@ export const App = () => {
 					</Grid>
 
 					<Grid item xs={12} sm={12}>
+						{/* Todo: When we have at least one property that uses 2 lines then the description disappears */}
+						{/* Todo: When we have a property with 2 lines the second line does not have the padding */}
 						<PropertyList properties={properties} label={language.property} language={language} onChange={onInputChange}/>
 					</Grid>
 					<Grid item sm={6} mb={{xs:5,sm:5, md: 0}}>

@@ -22,6 +22,8 @@ export const PropertyList = ({properties, label, onChange, language}) => {
 			{properties.map((property, index) =>{
 				return(
 					<Grid key={index} container>
+						{/* Todo?: After adding the font for the title this checkbox started to use the font that the viewer uses and that is used in another file
+							Why?, is important? */}
 						<Grid item xs={2} sx={{alignSelf:'center', align:'left', fontFamily:'arial', fontSize:{xs:'15px'}}}>
 							{language.gradient}
 							<Checkbox/>

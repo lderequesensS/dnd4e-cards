@@ -1,6 +1,3 @@
-
-// Todo: add icons
-
 export const fieldLabel = {
 	spanish:{
 		language:'Lenguaje',
@@ -11,7 +8,7 @@ export const fieldLabel = {
 		action:'Acción',
 		range:'Rango',
 		description:'Descripcion',
-		icon:'Icono',
+		icon:'Ícono',
 		add:'Agregar propiedad',
 		property:'Propiedad',
 		types:{
@@ -26,7 +23,8 @@ export const fieldLabel = {
 			3: 'Acción gratuita',
 			4: 'Acción inmediata',
 			5: 'Acción de oportunidad'
-		}
+		},
+		gradient: 'Gradiente',
 	},
 	english:{
 		language:'Language',
@@ -52,7 +50,7 @@ export const fieldLabel = {
 			3: 'Free action',
 			4: 'Immediate action',
 			5: 'Opportunity action'
-		}
+		},
+		gradient: 'Gradient',
 	},
-
 }

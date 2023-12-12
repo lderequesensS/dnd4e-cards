@@ -1,4 +1,4 @@
-import {Button, Grid, Typography, InputLabel, MenuItem, Select, TextField, OutlinedInput, FormControl, Box} from "@mui/material";
+import {Button, Grid, Typography, InputLabel, MenuItem, Select, TextField, OutlinedInput, FormControl, Box, CssBaseline} from "@mui/material";
 import {useRef, useState} from "react";
 import {fieldLabel} from "./language.js";
 import {useForm} from "./useForm.js";
@@ -88,6 +88,7 @@ export const App = () => {
 			{/*    {'Cargar'}*/}
 			{/*    <Input inputRef={fileInputRef} type="file" sx={{display:'none'}} onChange={(e) => showFile(e)} />*/}
 			{/*</Button>*/}
+			<CssBaseline/>
 
 			<Grid container
 					alignItems="center"
@@ -107,12 +108,12 @@ export const App = () => {
 						ml={{xs: 1, sm: 3, md:10}}
 					/>
 				</Grid>
-				{/* Todo: make this with another font to be nicer */}
+				<CssBaseline/>
 				<Grid item sm={6} md={6}>
-					<Typography ml={{xs: 2, sm: 3, md:10}} sx={{fontWeight: 'bold', fontSize:{xs:'30px',sm:'30px',md:'36px'}}} variant='h2'>Simple card generator</Typography>
+						<Typography ml={{xs: 2, sm: 3, md:10, lg:12}} sx={{fontSize:{xs:'40px',sm:'50px',md:'60px',lg:'90px'}}} variant='h1'>Simple card generator</Typography>
 				</Grid>
 
-				<FormControl >
+				<FormControl>
 					<InputLabel id="language-label">{language.language}</InputLabel>
 					<Select
 						sx={fieldStyle}
@@ -218,7 +219,7 @@ export const App = () => {
 					</Grid>
 
 					<Grid item xs={12} sm={12}>
-						<PropertyList properties={properties} label={language.property} onChange={onInputChange}/>
+						<PropertyList properties={properties} label={language.property} language={language} onChange={onInputChange}/>
 					</Grid>
 					<Grid item sm={6} mb={{xs:5,sm:5, md: 0}}>
 						<Button variant={'contained'} fullWidth onClick={onAddProperty}>{language.add}</Button>

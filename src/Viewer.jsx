@@ -7,7 +7,7 @@ export const Viewer = ({barColor, formState, language}) => {
 		<>
 			<ThemeProvider theme={typoTheme}>
 			<CssBaseline/>
-			<Grid item xs={12} sm={10} md={5} sx={{border:1, ml:{sm:0,md:4}, mb:{xs:20,sm:20,md:0}, minHeight:{sm:'500px',md:0}, height:(300 + formState.properties.length * 20) + 'px'}} >
+			<Grid item xs={12} sm={10} md={5} sx={{border:1, ml:{sm:0,md:4}, mb:{xs:20,sm:20,md:0}, minHeight:{sm:'500px',md:0}, height:(200 + formState.properties.length * 20) + 'px'}} >
 				<Grid container sx={{height:'50px', backgroundColor:barColor, color:'white'}} justifyContent={'space-between'} alignItems={'center'}>
 					<Grid item ml={2}>
 						{/*Todo change icon*/}

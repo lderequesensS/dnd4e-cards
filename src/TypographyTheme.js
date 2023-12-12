@@ -1,4 +1,4 @@
-import vecna from "./Vecna-oppx.ttf"
+import vecna from "./fonts/Vecna-oppx.ttf"
 import { createTheme } from "@mui/material";
 
 export const typoTheme = createTheme({

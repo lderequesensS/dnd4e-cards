@@ -228,13 +228,13 @@ export const App = () => {
 					</Grid>
 
 				</Grid>
-
-				<Viewer 
-					barColor={barColor}
-					formState={formState}
-					language={language}
-				/>
-
+				<Grid  item xs={12} sm={10} md={5} sx={{ ml:{sm:0,md:4} }}>
+					<Viewer
+						barColor={barColor}
+						formState={formState}
+						language={language}
+					/>
+				</Grid>
 			</Grid>
 		</>
 	);

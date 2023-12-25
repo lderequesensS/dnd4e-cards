@@ -6,7 +6,7 @@ export const PropertyListViewer = ({properties}) => {
 		<>
 			{properties.map((elemento,index) => {
 				const [title, content] = elemento.split(':');
-				let out = <Typography sx={{pl:1}} display={'inline'}>{title}</Typography>
+				let out = <Typography sx={{pl:1, boxDecorationBreak:'clone',whiteSpace:'break-spaces'}} display={'inline'}>{title}</Typography>
 				if (content) {
 					out = <Typography sx={{fontWeight: 'bold', pl:1}} display={'inline'}>{title}:</Typography>
 					
@@ -14,7 +14,7 @@ export const PropertyListViewer = ({properties}) => {
 				return (
 						<Grid key={index}>
 							{out}
-							<Typography sx={{ pl:1 }}display={'inline'}>{content?content:''}</Typography>
+							<Typography sx={{ pl:1, boxDecorationBreak:'clone',whiteSpace:'break-spaces' }}display={'inline'}>{content?content:''}</Typography>
 						</Grid>
 				)})
 			}

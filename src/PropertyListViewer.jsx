@@ -1,14 +1,14 @@
 import {Grid, Typography} from "@mui/material";
 
-export const PropertyListViewer = ({properties, gradients}) => {
+export const PropertyListViewer = ({properties}) => {
 	return (
 		<>
-			{properties.map((element,index) => {
-				const [title, content] = element.split(':');
+			{properties.map(({text,gradient},index) => {
+				const [title, content] = text.split(':');
 				const baseStyle = {pl:1, boxDecorationBreak:'clone',whiteSpace:'break-spaces'}
 
 				let styleGrid = {}
-				if (gradients[index]) {
+				if (gradient) {
 					styleGrid = {background:'linear-gradient(to right, #dcddcb, #ffffff)'}
 				}
 

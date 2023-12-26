@@ -1,26 +1,23 @@
 import {Grid, IconButton, TextField, Checkbox} from "@mui/material";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-export const PropertyList = ({properties, gradients, label, onChange, language}) => {
+export const PropertyList = ({properties, label, onChange, language}) => {
 
 	const onChangeProperty = (event, index) => {
 		const newValue = [...properties];
-		newValue[index] = !newValue[index];
+		newValue[index].text = event.target.value;
 		onChange({target:{value:newValue, name:'properties'}})
 	}
 
 	const onChangeGradient = (event, index) => {
 		const newValue = [...properties];
-		newValue[index] = event.target.value;
-		onChange({target:{value:newValue, name:'gradients'}})
+		newValue[index].gradient = event.target.checked
+		onChange({target:{value:newValue, name:'properties'}})
 	}
 
 	const onDeleteProperty = (index) => {
 		const newValue = [...properties];
-		const newGradients = [...gradients];
 		newValue.splice(index,1);
-		newGradients.slice(index,1);
 		onChange({target:{value:newValue, name:'properties'}})
-		onChange({target:{value:newGradients, name:'gradients'}})
 	}
 
 	// 'linear-gradient(to right, #dcddcb, #ffffff)'
@@ -39,7 +36,7 @@ export const PropertyList = ({properties, gradients, label, onChange, language})
 						</Grid>
 						<Grid item xs={9}>
 							<TextField
-								value={property}
+								value={property.text}
 								fullWidth
 								sx={{mb:2}}
 								type={"text"}

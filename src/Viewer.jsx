@@ -22,7 +22,7 @@ export const Viewer = ({barColor, formState, language}) => {
 						<Typography sx={{fontWeight: 'bold', pl:1}} >{language.types[formState.type]} ♦ {formState.keywords}</Typography>
 						<Typography sx={{fontWeight: 'bold', pl:1}} display={'inline'}>{language.actions[formState.action]}</Typography>
 						<Typography sx={{fontWeight: 'bold', pl:5}} display={'inline'}>{formState.range}</Typography>
-						<PropertyListViewer properties={formState.properties} gradients={formState.gradients}/>
+						<PropertyListViewer properties={formState.properties}/>
 					</Grid>
 					<Grid container item justifyContent={'center'}>
 						<Typography align={'justify'} pl={4} pr={4}>

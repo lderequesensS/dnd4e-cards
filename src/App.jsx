@@ -17,7 +17,7 @@ const initData = {
 	type:'0',
 	keywords:'',
 	description:'',
-	properties:[''],
+	properties:[{text:'', gradient: false}],
 	action:'0',
 	range: '',
 	icon1:'',
@@ -29,7 +29,7 @@ export const App = () => {
 	const [language, setLanguage] = useState(fieldLabel.spanish);
 	const [languageNumber, setLanguageNumber] = useState(0);
 	const [barColor, setBarColor] = useState('atWill.main');
-	const {name, level, type, keywords, description, properties, gradients, action, range, icon1, icon2, onInputChange, formState} = useForm(initData);
+	const {name, level, type, keywords, description, properties, action, range, icon1, icon2, onInputChange, formState} = useForm(initData);
 
 	const fileInputRef = useRef();
 
@@ -43,9 +43,9 @@ export const App = () => {
 		reader.readAsText(e.target.files[0])
 	}
 
-	const onAddProperty = () =>{
-		const newValue = [...properties, ''];
-		onInputChange({target:{value:newValue, name:'properties'}})
+	const onAddProperty = async () =>{
+		const newValue = [...properties, {text:'', gradient:false}];
+		await onInputChange({target:{value:newValue, name:'properties'}})
 	}
 	const onChangeLanguage = (event) =>{
 		const newValue = event.target.value;
@@ -252,7 +252,7 @@ export const App = () => {
 					</Grid>
 
 					<Grid item xs={12} sm={12}>
-						<PropertyList properties={properties} gradients={gradients} label={language.property} language={language} onChange={onInputChange}/>
+						<PropertyList properties={properties} label={language.property} language={language} onChange={onInputChange}/>
 					</Grid>
 					<Grid item sm={6} mb={{xs:5,sm:5, md: 0}}>
 						<Button variant={'contained'} fullWidth onClick={onAddProperty}>{language.add}</Button>

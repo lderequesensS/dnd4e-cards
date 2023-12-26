@@ -18,7 +18,7 @@ export const Viewer = ({barColor, formState, language}) => {
 					</Grid>
 				</Grid>
 				<Grid container direction="column" justifyContent="space-between" alignItems="flex-start" height={'calc(100% - 50px)'} sx={{minHeight:'200px'}}	>
-					<Grid item >
+					<Grid item sx={{minWidth:'100%'}}>
 						<Typography sx={{fontWeight: 'bold', pl:1}} >{language.types[formState.type]} ♦ {formState.keywords}</Typography>
 						<Typography sx={{fontWeight: 'bold', pl:1}} display={'inline'}>{language.actions[formState.action]}</Typography>
 						<Typography sx={{fontWeight: 'bold', pl:5}} display={'inline'}>{formState.range}</Typography>

@@ -7,9 +7,9 @@ export const PropertyListViewer = ({properties}) => {
 				const [title, content] = text.split(':');
 				const baseStyle = {pl:1, boxDecorationBreak:'clone',whiteSpace:'break-spaces'}
 
-				let styleGrid = {}
+				let styleGrid = {minWidth: '100%'}
 				if (gradient) {
-					styleGrid = {background:'linear-gradient(to right, #dcddcb, #ffffff)'}
+					styleGrid = {...styleGrid, background:'linear-gradient(to right, #dcddcb, #ffffff)'}
 				}
 
 				let out = <Typography sx={baseStyle} display={'inline'}>{title}</Typography>

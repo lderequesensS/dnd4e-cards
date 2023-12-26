@@ -19,7 +19,9 @@ const initData = {
 	description:'',
 	properties:[''],
 	action:'0',
-	range: ''
+	range: '',
+	icon1:'',
+	icon2:''
 }
 
 
@@ -27,8 +29,7 @@ export const App = () => {
 	const [language, setLanguage] = useState(fieldLabel.spanish);
 	const [languageNumber, setLanguageNumber] = useState(0);
 	const [barColor, setBarColor] = useState('atWill.main');
-	const {name, level, type, keywords, description, properties, action, range, onInputChange, formState} = useForm(initData);
-	const linearGradient = {background:'linear-gradient(to right, #dcddcb, #ffffff)'};
+	const {name, level, type, keywords, description, properties, gradients, action, range, icon1, icon2, onInputChange, formState} = useForm(initData);
 
 	const fileInputRef = useRef();
 
@@ -131,9 +132,6 @@ export const App = () => {
 			<Grid container sx={{mt:10}} justifyContent={'center'}>
 				<Grid container item xs={12} sm={10} md={5} justifyContent={'center'}>
 
-					<Grid item xs={12} sm={12}>
-					</Grid>
-
 					<Grid item xs={12} sm={12} md={6}>
 						<TextField fullWidth
 									value={name}
@@ -148,6 +146,41 @@ export const App = () => {
 									name={'level'}
 									onChange={onInputChange}
 									type={"text"} sx={fieldStyle} label={language.level}></TextField>
+					</Grid>
+
+					<Grid item>
+						<Grid item xs={2}></Grid>
+						<Grid item xs={4} sm={4} md={4}>
+							<FormControl>
+								<InputLabel id="testing">{language.icon}</InputLabel>
+								<Select
+									sx={fieldStyle}
+									labelId="testing"
+									value={icon1}
+									onChange={onChangeLanguage}
+									input={<OutlinedInput label={language.icon} />}
+									>
+								<MenuItem value={0} default>Español</MenuItem>
+								<MenuItem value={1}>English</MenuItem>
+								</Select>
+							</FormControl>
+						</Grid>
+						<Grid item xs={4} sm={4} md={4}>
+							<FormControl>
+								<InputLabel id="test">{language.icon}</InputLabel>
+								<Select
+									sx={fieldStyle}
+									labelId="test"
+									value={icon2}
+									onChange={onChangeLanguage}
+									input={<OutlinedInput label={language.icon} />}
+									>
+								<MenuItem value={0} default>Español</MenuItem>
+								<MenuItem value={1}>English</MenuItem>
+								</Select>
+							</FormControl>
+						</Grid>
+						<Grid item xs={2}></Grid>
 					</Grid>
 
 					<Grid item xs={12} sm={12} md={12}>
@@ -219,9 +252,7 @@ export const App = () => {
 					</Grid>
 
 					<Grid item xs={12} sm={12}>
-						{/* Todo: When we have at least one property that uses 2 lines then the description disappears */}
-						{/* Todo: When we have a property with 2 lines the second line does not have the padding */}
-						<PropertyList properties={properties} label={language.property} language={language} onChange={onInputChange}/>
+						<PropertyList properties={properties} gradients={gradients} label={language.property} language={language} onChange={onInputChange}/>
 					</Grid>
 					<Grid item sm={6} mb={{xs:5,sm:5, md: 0}}>
 						<Button variant={'contained'} fullWidth onClick={onAddProperty}>{language.add}</Button>

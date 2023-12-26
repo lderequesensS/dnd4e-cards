@@ -1,32 +1,41 @@
 import {Grid, IconButton, TextField, Checkbox} from "@mui/material";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-export const PropertyList = ({properties, label, onChange, language}) => {
+export const PropertyList = ({properties, gradients, label, onChange, language}) => {
 
-	const onChangeProperty = (event, index) =>{
+	const onChangeProperty = (event, index) => {
+		const newValue = [...properties];
+		newValue[index] = !newValue[index];
+		onChange({target:{value:newValue, name:'properties'}})
+	}
+
+	const onChangeGradient = (event, index) => {
 		const newValue = [...properties];
 		newValue[index] = event.target.value;
-		onChange({target:{value:newValue, name:'properties'}})
+		onChange({target:{value:newValue, name:'gradients'}})
 	}
 
 	const onDeleteProperty = (index) => {
 		const newValue = [...properties];
+		const newGradients = [...gradients];
 		newValue.splice(index,1);
+		newGradients.slice(index,1);
 		onChange({target:{value:newValue, name:'properties'}})
+		onChange({target:{value:newGradients, name:'gradients'}})
 	}
 
-	const onAddGradient = (index) => {
-	}
+	// 'linear-gradient(to right, #dcddcb, #ffffff)'
 
 	return (
 		<>
-			{properties.map((property, index) =>{
+			{properties.map((property, index) => {
 				return(
 					<Grid key={index} container>
 						{/* Todo?: After adding the font for the title this checkbox started to use the font that the viewer uses and that is used in another file
 							Why?, is important? */}
 						<Grid item xs={2} sx={{alignSelf:'center', align:'left', fontFamily:'arial', fontSize:{xs:'15px'}}}>
 							{language.gradient}
-							<Checkbox/>
+							<Checkbox onChange={(event) => onChangeGradient(event, index)}
+						/>
 						</Grid>
 						<Grid item xs={9}>
 							<TextField

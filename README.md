@@ -13,3 +13,5 @@ yarn dev
 
 [https://dnd4e-cards.netlify.app/](https://dnd4e-cards.netlify.app/)
 
+## ToDos
+- [ ] Put actions icons to title of "card"

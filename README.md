@@ -1,3 +1,5 @@
+# No longer working on this project, switched to [this](https://github.com/lderequesensS/dnd4e-cards-svelte)
+
 # D&D 4e power cards generator
 
 This is heavily inspired in https://tools.omnichron.net/dnd/pow.html, for the
